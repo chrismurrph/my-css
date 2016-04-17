@@ -10,10 +10,14 @@
                  [navis/untangled-client "0.4.7-SNAPSHOT"]
                  [default-db-format "0.1.1-SNAPSHOT"]]
 
-  :plugins [[lein-cljsbuild "1.1.2"]]
+  :plugins [[lein-cljsbuild "1.1.2"]
+            [lein-less "1.7.5"]]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
   :source-paths ["dev/server" "src/client"]
+
+  :less {:source-paths ["less/app.main.less"]
+         :target-path "resources/public/css/app.css"}
 
   :cljsbuild {:builds {:dev        {:source-paths ["dev/client" "src/client"]
                                     :figwheel     true
