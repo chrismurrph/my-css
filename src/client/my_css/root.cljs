@@ -7,6 +7,22 @@
             [my-css.ui :as ui]))
 
 (defui ^:once Root
+  static om/IQuery
+  (query [this] [:ui/locale :ui/react-key {:current-tab (om/get-query ui/Tab)}])
+  Object
+  (render [this]
+    (let [{:keys [current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
+          tab (:tab/type current-tab)]
+      (dom/div #js {:key react-key}                         ; needed for forced re-render to work on locale changes and hot reload
+               (dom/div nil
+                        (dom/ul #js {:className "tabs"}
+                                (dom/li #js {:className (str "tab" (if (= tab :main) " active-tab"))}
+                                        (dom/a #js {:onClick #(om/transact! this '[(nav/change-tab {:target :main})])} "Main"))
+                                (dom/li #js {:className (str "tab" (if (= tab :settings) " active-tab"))}
+                                        (dom/a #js {:onClick #(om/transact! this '[(nav/change-tab {:target :settings})])} "Settings")))
+                        (ui/ui-tab current-tab))))))
+
+#_(defui ^:once Root
        static om/IQuery
        (query [_]
               [{:root-join (om/get-query ui/AutoCompleter)}])

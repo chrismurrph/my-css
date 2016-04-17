@@ -1,36 +1,43 @@
 (ns my-css.ui
-  (:require [om.next :as om :refer-macros [defui]]
-            [untangled.client.mutations :as mut]
-            [om.dom :as dom]))
+  (:require [om.dom :as dom]
+            [om.next :as om :refer-macros [defui]]))
 
-(defn result-list [results]
-  (dom/ul #js {:key "result-list"}
-          (map #(dom/li #js{:key %} %) results)))
-
-(defn search-field [component user-request]
-  (dom/input
-    #js {:key   "search-field"
-         :value user-request
-         :onChange
-                (fn [e]
-                  (let [evt-val (.. e -target -value)
-                        _ (println "Entered: " evt-val)]
-                    #_(om/set-query! component
-                                   {:params {:user-query evt-val}})))}))
-
-(defui AutoCompleter
+(defui ^:once SettingsTab
   static om/IQuery
-  (query [_]
-    '[:ui/results :ui/user-request])
+  (query [this] [:id :tab/type :tab/label])
   Object
   (render [this]
-    (let [{:keys [ui/results ui/user-request]} (om/props this)
-          _ (println "results:" results)]
+    (let [{:keys [tab/label]} (om/props this)]
       (dom/div nil
-               (dom/h2 nil "AutoCompleter")
-               (cond->
-                 [(search-field this user-request)]
-                 (not (empty? results)) (conj (result-list results)))
-               (dom/br nil)
-               (#_ (dom/button #js{:onClick (fn [_] (read-query))} "Read Query"))))))
-(def auto-completer (om/factory AutoCompleter))
+               (dom/h3 nil label)
+               (dom/p nil "settings ...")))))
+
+(def ui-settings-tab (om/factory SettingsTab))
+
+(defui ^:once MainTab
+  static om/IQuery
+  (query [this] [:id :tab/type :tab/label])
+  Object
+  (render [this]
+    (let [{:keys [tab/label]} (om/props this)]
+      (dom/div nil
+               (dom/h3 nil label)
+               (dom/p nil "main ...")))))
+
+(def ui-main-tab (om/factory MainTab))
+
+(defui ^:once Tab
+  static om/IQuery
+  (query [this] {:main (om/get-query MainTab) :settings (om/get-query SettingsTab)})
+  static om/Ident
+  (ident [this props] [(:tab/type props) (:id props)])
+  Object
+  (render [this]
+    (let [{:keys [tab/type] :as props} (om/props this)]
+      (case type
+        :main (ui-main-tab props)
+        :settings (ui-settings-tab props)
+        (dom/div nil "MISSING TAB")))))
+
+(def ui-tab (om/factory Tab))
+
