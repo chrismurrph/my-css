@@ -1,3 +1,4 @@
 .idea
+.idea/uiDesigner.xml
 /*.iml
 figwheel_server.log
