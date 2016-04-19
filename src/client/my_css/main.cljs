@@ -6,4 +6,4 @@
             [om.dom :as dom]
             [om.next :as om]))
 
-(reset! core/app (uc/mount @core/app root/Root "app"))
+(reset! core/app (uc/mount @core/app root/App "app"))

@@ -17,7 +17,7 @@
 
 (log/set-level :debug)
 
-(reset! core/app (uc/mount @core/app root/Root "app"))
+(reset! core/app (uc/mount @core/app root/App "app"))
 
 (comment
   (defn log-app-state
