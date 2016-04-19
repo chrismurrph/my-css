@@ -31,13 +31,18 @@
 ;</div>
 ;</div>
 ;</div>
+
+(defn tab-style [tab kw]
+  #js{:className (str "pure-menu-item" (if (= tab kw) " pure-menu-selected"))})
+
 (defui ^:once App
   static om/IQuery
   (query [this] [:ui/locale :ui/react-key {:current-tab (om/get-query ui/Tab)}])
   Object
   (render [this]
     (let [{:keys [current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
-          tab (:tab/type current-tab)]
+          tab (:tab/type current-tab)
+          _ (println "tab is " tab)]
       (dom/div #js{:className "custom-wrapper pure-g"
                    :id "menu"}
                (dom/div #js{:className "pure-u-1 pure-u-md-1-3"}
@@ -51,12 +56,14 @@
                (dom/div #js{:className "pure-u-1 pure-u-md-1-3"}
                         (dom/div #js{:className "pure-menu pure-menu-horizontal custom-can-transform"}
                                  (dom/ul #js{:className "pure-menu-list"}
-                                         (dom/li #js{:className "pure-menu-item"}
+                                         (dom/li (tab-style tab :main)
                                                  (dom/a #js{:className "pure-menu-link"
-                                                            :href "#"} "Home"))
-                                         (dom/li #js{:className "pure-menu-item"}
+                                                            :href "#"
+                                                            :onClick #(om/transact! this '[(nav/change-tab {:target :main})])} "Main"))
+                                         (dom/li (tab-style tab :settings)
                                                  (dom/a #js{:className "pure-menu-link"
-                                                            :href "#"} "About"))
+                                                            :href "#"
+                                                            :onClick #(om/transact! this '[(nav/change-tab {:target :settings})])} "Settings"))
                                          (dom/li #js{:className "pure-menu-item"}
                                                  (dom/a #js{:className "pure-menu-link"
                                                             :href "#"} "Contact")))))
@@ -88,8 +95,6 @@
 ; </div>
 ;
 ;
-(defn tab-style [tab]
-  #js{:className (str "one column button" (if (= tab :main) " active-tab"))})
 
 (comment (defui ^:once Root
            static om/IQuery
