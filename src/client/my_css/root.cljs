@@ -13,6 +13,20 @@
 (defn tab-style [tab]
   #js{:className (str "one column button" (if (= tab :main) " active-tab"))})
 
+;
+;
+; <div class="flex flex-stretch">
+; <div class="flex-auto px2 py4 blue border">
+; <h1 class="m0">Hamburger</h1>
+; </div>
+; <div class="flex blue border">
+; <div class="px2 white bg-blue">
+; Hot dog
+; </div>
+; </div>
+; </div>
+;
+;
 (defui ^:once Root
   static om/IQuery
   (query [this] [:ui/locale :ui/react-key {:current-tab (om/get-query ui/Tab)}])
@@ -21,11 +35,16 @@
     (let [{:keys [current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
           tab (:tab/type current-tab)]
       (dom/div nil
-               (dom/a #js{:className "button button-primary"} "Anchor button")
-               (dom/div #js{:className "container"}
-                        (dom/div #js{:className "row"}
-                                 (dom/div #js{:className "one column button active-tab"} "One")
-                                 (dom/div #js{:className "one column button button-primary"} "Two")))
+               (dom/div #js{:className "flex"}
+                        (dom/div #js{:className "px2 py4 blue border"}
+                                 (dom/h1 #js{:className "m0"} "Hamburger"))
+                        (dom/div #js{:className "flex blue border"}
+                                 (dom/div #js{:className "px2 py2 py4 white bg-blue"} "Hot dog")))
+               (dom/button #js{:className "btn btn-primary mb1"} "Anchor button")
+               (dom/div #js{:className "flex"}
+                        (dom/div #js{:className "flex blue border"}
+                                 (dom/div #js{:className "p1 blue border"} "One")
+                                 (dom/div #js{:className "p1 blue border"} "Two")))
                (dom/div #js{:key react-key :className "container"} ; needed for forced re-render to work on locale changes and hot reload
                         (dom/div #js{:className "row"}
                                  (dom/div #js{:className "twelve columns"}
