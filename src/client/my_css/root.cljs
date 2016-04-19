@@ -6,6 +6,13 @@
             [default-db-format.core :as db-format]
             [my-css.ui :as ui]))
 
+;;
+;; <a class="button button-primary" href="#">Anchor button</a>
+;;
+
+(defn tab-style [tab]
+  #js{:className (str "one column button" (if (= tab :main) " active-tab"))})
+
 (defui ^:once Root
   static om/IQuery
   (query [this] [:ui/locale :ui/react-key {:current-tab (om/get-query ui/Tab)}])
@@ -13,14 +20,23 @@
   (render [this]
     (let [{:keys [current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
           tab (:tab/type current-tab)]
-      (dom/div #js {:key react-key}                         ; needed for forced re-render to work on locale changes and hot reload
-               (dom/div nil
-                        (dom/ul #js {:className "tabs"}
-                                (dom/li #js {:className (str "tab" (if (= tab :main) " active-tab"))}
-                                        (dom/a #js {:onClick #(om/transact! this '[(nav/change-tab {:target :main})])} "Main"))
-                                (dom/li #js {:className (str "tab" (if (= tab :settings) " active-tab"))}
-                                        (dom/a #js {:onClick #(om/transact! this '[(nav/change-tab {:target :settings})])} "Settings")))
-                        (ui/ui-tab current-tab))))))
+      (dom/div nil
+               (dom/a #js{:className "button button-primary"} "Anchor button")
+               (dom/div #js{:className "container"}
+                        (dom/div #js{:className "row"}
+                                 (dom/div #js{:className "one column button active-tab"} "One")
+                                 (dom/div #js{:className "one column button button-primary"} "Two")))
+               (dom/div #js{:key react-key :className "container"} ; needed for forced re-render to work on locale changes and hot reload
+                        (dom/div #js{:className "row"}
+                                 (dom/div #js{:className "twelve columns"}
+                                          (dom/nav nil
+                                                   (dom/ul nil
+                                                           (dom/li nil #_{:className (str "tab" (if (= tab :main) " active-tab"))}
+                                                                   (dom/a #js{:onClick #(om/transact! this '[(nav/change-tab {:target :main})])} "Main"))
+
+                                                           (dom/li nil #_{:className (str "tab" (if (= tab :settings) " active-tab"))}
+                                                                   (dom/a #js{:onClick #(om/transact! this '[(nav/change-tab {:target :settings})])} "Settings")))))
+                                 (ui/ui-tab current-tab)))))))
 
 #_(defui ^:once Root
        static om/IQuery
