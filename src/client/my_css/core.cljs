@@ -11,7 +11,7 @@
 
 (defonce app (atom (uc/new-untangled-client
                      ; can pass an atom, which means you hand normalized it already.
-                     :initial-state (atom state/initial-state)
+                     :initial-state (merge state/initial-state (state/internment-of-tabs state/pre-norm-state))
                      :started-callback (fn [app]
                                          #_(configure-routing! (:reconciler app))
                                          #_(let [h (History.)]

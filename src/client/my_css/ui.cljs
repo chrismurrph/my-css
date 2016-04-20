@@ -46,7 +46,7 @@
                (dom/p nil "reports ...")))))
 (def ui-reports-tab (om/factory ReportsTab))
 
-(defui ^:once Tab
+(defui ^:once TabUnion
   static om/IQuery
   (query [this] {:app/map (om/get-query MapTab)
                  :app/trending (om/get-query TrendingTab)
@@ -65,5 +65,5 @@
         :app/reports (ui-reports-tab props)
         (dom/div nil (str "MISSING TAB: <" type ">"))))))
 
-(def ui-tab (om/factory Tab))
+(def ui-tab (om/factory TabUnion))
 
