@@ -6,11 +6,10 @@
             [default-db-format.core :as db-format]
             [cljs.pprint :as pp :refer [pprint]]
             [my-css.ui :as ui]
-            [my-css.state :as state]
             [my-css.components.general :as gen]
             [my-css.components.graphing :as graph]
             [my-css.components.grid :as grid]
-            ))
+            [my-css.state :as state]))
 
 (defn tab-style [tab kw]
   #js{:className (str "pure-menu-item" (if (= tab kw) " pure-menu-selected"))})
@@ -33,24 +32,20 @@
 
 (defui ^:once App
   static om/IQuery
-  (query [this] [
-                 :ui/locale
-                 :ui/react-key
-                 {:app/current-tab (om/get-query ui/TabUnion)}
-                 ;{:app/sys-gases (om/get-query gen/SystemGas)}
-                 {:app/tubes (om/get-query gen/Location)}
-                 {:tube/real-gases (om/get-query grid/GridDataCell)}
-                 {:graph/lines (om/get-query graph/Line)}
-
-                 ])
+  (query [this] (into ui/non-union-part-of-root-query
+                      [:ui/locale
+                       :ui/react-key
+                       {:app/current-tab (om/get-query ui/TabUnion)}
+                       ]))
   Object
   (render [this]
     (let [{:keys [app/current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
           {:keys [tab/type tab/label]} current-tab
           _ (println "tab is " type " from " current-tab)
-          my-reconciler (:reconciler @core/app)]
+          ;my-reconciler (:reconciler @core/app)
+          ]
       (dom/div nil
-               (if my-reconciler
+               #_(if my-reconciler
                  (check-default-db @my-reconciler)
                  (println "reconciler not available in Root component when first mounted"))
                (dom/div #js{:className "custom-wrapper pure-g"
@@ -88,11 +83,6 @@
                                                   (dom/li #js{:className "pure-menu-item"}
                                                           (dom/a #js{:className "pure-menu-link"
                                                                      :href      "#"
-                                                                     :onClick #(pprint @(:reconciler @core/app))} "Help"))
-                                                  #_(dom/li #js{:className "pure-menu-item"}
-                                                          (dom/a #js{:className "pure-menu-link"
-                                                                     :href      "#"} "W3C"))))))
+                                                                     :onClick #(pprint @(:reconciler @core/app))} "Help"))))))
                (dom/div nil
-                        (ui/ui-tab current-tab))
-               #_(dom/div #js{:className "main"}
-                        (dom/h1 nil "Responsive menu"))))))
+                        (ui/ui-tab current-tab))))))

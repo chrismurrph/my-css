@@ -1,6 +1,15 @@
 (ns my-css.ui
   (:require [om.dom :as dom]
-            [om.next :as om :refer-macros [defui]]))
+            [om.next :as om :refer-macros [defui]]
+            [my-css.components.graphing :as graph]
+            [my-css.components.grid :as grid]
+            [my-css.components.general :as gen]))
+
+(def non-union-part-of-root-query
+  [{:app/sys-gases (om/get-query gen/SystemGas)}
+   {:app/tubes (om/get-query gen/Location)}
+   {:tube/real-gases (om/get-query grid/GridDataCell)}
+   {:graph/lines (om/get-query graph/Line)}])
 
 (defui ^:once MapTab
   static om/IQuery
@@ -48,10 +57,10 @@
 
 (defui ^:once TabUnion
   static om/IQuery
-  (query [this] {:app/map (om/get-query MapTab)
-                 :app/trending (om/get-query TrendingTab)
+  (query [this] {:app/map        (om/get-query MapTab)
+                 :app/trending   (om/get-query TrendingTab)
                  :app/thresholds (om/get-query ThresholdsTab)
-                 :app/reports (om/get-query ReportsTab)})
+                 :app/reports    (om/get-query ReportsTab)})
   static om/Ident
   (ident [this props] [(:tab/type props) (:id props)])
   Object

@@ -6,12 +6,16 @@
             [goog.events :as events]
             [goog.history.EventType :as EventType]
             [om.next :as om]
-            [untangled.client.logging :as log])
+            [untangled.client.logging :as log]
+            [cljs.pprint :refer [pprint]])
   (:import goog.History))
+
+(def merged-state (atom (merge state/already-normalized-tabs-state (om/tree->db ui/non-union-part-of-root-query state/initial-state true))))
+(pprint @merged-state)
 
 (defonce app (atom (uc/new-untangled-client
                      ; can pass an atom, which means you hand normalized it already.
-                     :initial-state (merge state/initial-state (state/internment-of-tabs state/pre-norm-state))
+                     :initial-state merged-state
                      :started-callback (fn [app]
                                          #_(configure-routing! (:reconciler app))
                                          #_(let [h (History.)]
