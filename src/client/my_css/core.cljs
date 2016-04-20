@@ -9,15 +9,27 @@
   (:import goog.History))
 
 (def initial-state {:data-item   {}
-                    :main        {:singleton {:id         :singleton
-                                              :tab/label  "Main"
-                                              :tab/type   :main
+                    :map         {:singleton {:id         :singleton
+                                              :tab/label  "Map"
+                                              :tab/type   :map
                                               :data-items nil}}
-                    :settings    {:singleton {:id        :singleton
-                                              :tab/label "Settings"
-                                              :tab/type  :settings}}
+                    :trending    {:singleton {:id        :singleton
+                                              :tab/label "Trending"
+                                              :tab/type  :trending}}
+                    :thresholds  {:singleton {:id        :singleton
+                                              :tab/label "Thresholds"
+                                              :tab/type  :thresholds}}
+                    :reports     {:singleton {:id        :singleton
+                                              :tab/label "Reports"
+                                              :tab/type  :reports}}
+                    :automatic   {:singleton {:id        :singleton
+                                              :tab/label "Automatic"
+                                              :tab/type  :automatic}}
+                    :logs        {:singleton {:id        :singleton
+                                              :tab/label "Logs"
+                                              :tab/type  :logs}}
                     ; switch to [:settings :singleton] to change tabs
-                    :current-tab [:main :singleton]})
+                    :current-tab [:map :singleton]})
 
 (defonce app (atom (uc/new-untangled-client
                      ; can pass an atom, which means you hand normalized it already.
