@@ -48,10 +48,10 @@
 
 (defui ^:once Tab
   static om/IQuery
-  (query [this] {:map (om/get-query MapTab)
-                 :trending (om/get-query TrendingTab)
-                 :thresholds (om/get-query ThresholdsTab)
-                 :reports (om/get-query ReportsTab)})
+  (query [this] {:app/map (om/get-query MapTab)
+                 :app/trending (om/get-query TrendingTab)
+                 :app/thresholds (om/get-query ThresholdsTab)
+                 :app/reports (om/get-query ReportsTab)})
   static om/Ident
   (ident [this props] [(:tab/type props) (:id props)])
   Object
@@ -59,10 +59,10 @@
     (let [{:keys [tab/type] :as props} (om/props this)
           _ (assert type)]
       (case type
-        :map (ui-map-tab props)
-        :trending (ui-trending-tab props)
-        :thresholds (ui-thresholds-tab props)
-        :reports (ui-reports-tab props)
+        :app/map (ui-map-tab props)
+        :app/trending (ui-trending-tab props)
+        :app/thresholds (ui-thresholds-tab props)
+        :app/reports (ui-reports-tab props)
         (dom/div nil (str "MISSING TAB: <" type ">"))))))
 
 (def ui-tab (om/factory Tab))
