@@ -20,7 +20,7 @@
   Object
   (render [this]
     (let [{:keys [tab/label]} (om/props this)]
-      (dom/div nil
+      (dom/div nil #_#js{:className "main"}
                (dom/h3 nil label)
                (dom/p nil "main ...")))))
 
