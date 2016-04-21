@@ -42,10 +42,10 @@
     (let [{:keys [app/current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
           {:keys [tab/type tab/label]} current-tab
           _ (println "tab is " type " from " current-tab)
-          ;my-reconciler (:reconciler @core/app)
+          my-reconciler (:reconciler @core/app)
           ]
       (dom/div nil
-               #_(if my-reconciler
+               (if my-reconciler
                  (check-default-db @my-reconciler)
                  (println "reconciler not available in Root component when first mounted"))
                (dom/div #js{:className "custom-wrapper pure-g"

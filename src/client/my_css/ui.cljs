@@ -9,7 +9,10 @@
   [{:app/sys-gases (om/get-query gen/SystemGas)}
    {:app/tubes (om/get-query gen/Location)}
    {:tube/real-gases (om/get-query grid/GridDataCell)}
-   {:graph/lines (om/get-query graph/Line)}])
+   {:graph/lines (om/get-query graph/Line)}
+   {:grid/gas-query-grid (om/get-query grid/GasQueryGrid)}
+   {:grid/gas-query-panel (om/get-query grid/GasQueryPanel)}
+   ])
 
 (defui ^:once MapTab
   static om/IQuery
@@ -22,66 +25,17 @@
                (dom/p nil "map ...")))))
 (def ui-map-tab (om/factory MapTab))
 
-;<table class="pure-table">
-;<thead>
-;<tr>
-;<th>#</th>
-;<th>Make</th>
-;<th>Model</th>
-;<th>Year</th>
-;</tr>
-;</thead>
-;
-;<tbody>
-;<tr>
-;<td>1</td>
-;<td>Honda</td>
-;<td>Accord</td>
-;<td>2009</td>
-;</tr>
-;
-;<tr>
-;<td>2</td>
-;<td>Toyota</td>
-;<td>Camry</td>
-;<td>2012</td>
-;</tr>
-;
-;<tr>
-;<td>3</td>
-;<td>Hyundai</td>
-;<td>Elantra</td>
-;<td>2010</td>
-;</tr>
-;</tbody>
-;</table>
 (defui ^:once TrendingTab
   static om/IQuery
-  (query [this] [:id :tab/type :tab/label])
+  (query [this] [:id
+                 :tab/type
+                 :tab/label
+                 {:grid/gas-query-grid (om/get-query grid/GasQueryGrid)}
+                 ])
   Object
   (render [this]
-    (let [{:keys [tab/label]} (om/props this)]
-      (dom/table #js{:className "pure-table pure-table-striped"}
-                 (dom/thead nil
-                            (dom/tr nil
-                                    (dom/th nil "Tube #")
-                                    (dom/th nil "CH4")
-                                    (dom/th nil "O2")
-                                    (dom/th nil "CO")
-                                    (dom/th nil "CO2")))
-                 (dom/tbody nil
-                            (dom/tr nil
-                                    (dom/td nil "1")
-                                    (dom/td nil (dom/input #js{:type "checkbox"}))
-                                    (dom/td nil (dom/input #js{:type "checkbox"}))
-                                    (dom/td nil (dom/input #js{:type "checkbox"}))
-                                    (dom/td nil (dom/input #js{:type "checkbox"})))
-                            (dom/tr nil
-                                    (dom/td nil "2")
-                                    (dom/td nil (dom/input #js{:type "checkbox"}))
-                                    (dom/td nil (dom/input #js{:type "checkbox"}))
-                                    (dom/td nil (dom/input #js{:type "checkbox"}))
-                                    (dom/td nil (dom/input #js{:type "checkbox"}))))))))
+    (let [{:keys [grid/gas-query-grid] :as props} (om/props this)]
+      (grid/gas-query-panel-component props))))
 (def ui-trending-tab (om/factory TrendingTab))
 
 (defui ^:once ThresholdsTab
@@ -116,11 +70,11 @@
   (ident [this props] [(:tab/type props) (:id props)])
   Object
   (render [this]
-    (let [{:keys [tab/type] :as props} (om/props this)
+    (let [{:keys [tab/type graph/lines] :as props} (om/props this)
           _ (assert type)]
       (case type
         :app/map (ui-map-tab props)
-        :app/trending (ui-trending-tab props)
+        :app/trending (ui-trending-tab (om/computed props {:lines lines :click-cb-fn #(println "You clicked it")}))
         :app/thresholds (ui-thresholds-tab props)
         :app/reports (ui-reports-tab props)
         (dom/div nil (str "MISSING TAB: <" type ">"))))))
