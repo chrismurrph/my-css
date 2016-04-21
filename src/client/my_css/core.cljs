@@ -11,7 +11,7 @@
   (:import goog.History))
 
 (def merged-state (atom (merge state/already-normalized-tabs-state (om/tree->db ui/non-union-part-of-root-query state/initial-state true))))
-(pprint @merged-state)
+;(pprint @merged-state)
 
 (defonce app (atom (uc/new-untangled-client
                      ; can pass an atom, which means you hand normalized it already.

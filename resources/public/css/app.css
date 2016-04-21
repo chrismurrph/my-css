@@ -87,6 +87,10 @@ body {
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+td {
+  text-align: center;
+  vertical-align: middle;
+}
 /* Temp off
 @media (max-width: 47.999em) {
 
