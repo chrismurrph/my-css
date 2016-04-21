@@ -150,9 +150,7 @@
     [:id
      {:grid/gas-query-grid (om/get-query GasQueryGrid)}
      ;{:graph/trending-graph (om/get-query graph/TrendingGraph)}
-     ])
-  Object
-  )
+     ]))
 (def gas-query-panel-component (om/factory GasQueryPanel {:keyfn :id}))
 
 (comment (dom/table #js{:className "pure-table pure-table-striped"}

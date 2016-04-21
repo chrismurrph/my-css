@@ -41,7 +41,7 @@
   (render [this]
     (let [{:keys [app/current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
           {:keys [tab/type tab/label]} current-tab
-          _ (println "tab is " type " from " current-tab)
+          _ (println "tab is " type "")
           my-reconciler (:reconciler @core/app)
           ]
       (dom/div nil
@@ -68,7 +68,8 @@
                                                   (dom/li (tab-style type :app/trending)
                                                           (dom/a #js{:className "pure-menu-link"
                                                                      :href      "#"
-                                                                     :onClick   #(om/transact! this '[(nav/change-tab {:target :app/trending})])} "Trending"))
+                                                                     :onClick   #(om/transact! this '[(nav/change-tab {:target :app/trending})
+                                                                                                      (nav/lazy-load-tab {:target :app/trending})])} "Trending"))
                                                   (dom/li (tab-style type :app/thresholds)
                                                           (dom/a #js{:className "pure-menu-link"
                                                                      :href      "#"

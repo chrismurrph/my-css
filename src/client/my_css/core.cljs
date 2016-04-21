@@ -21,7 +21,7 @@
 
 (defonce app (atom (uc/new-untangled-client
                      ; passing an atom, since have hand normalized it already.
-                     :initial-state (transforms merged-state)
+                     :initial-state merged-state
                      :started-callback (fn [app]
                                          #_(configure-routing! (:reconciler app))
                                          #_(let [h (History.)]

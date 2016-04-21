@@ -39,7 +39,8 @@
                                  :tab/label "Trending"
                                  :tab/type  :app/trending
                                  ; These will be dynamically transferred in post-load
-                                 ;:grid/gas-query-grid {:id 10800}
+                                 ; (doesn't seem to hurt having)
+                                 :grid/gas-query-grid {:id 10800}
                                  ;:graph/trending-graph {:id 10300}
                                  }}
    :app/thresholds  {:singleton {:id        :singleton
