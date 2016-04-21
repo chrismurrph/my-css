@@ -152,27 +152,7 @@
      ;{:graph/trending-graph (om/get-query graph/TrendingGraph)}
      ])
   Object
-  (render [this]
-    (ld/log-render "GasQueryPanel" this)
-    (let [app-props (om/props this)
-          {:keys [grid/gas-query-grid graph/trending-graph]} app-props
-          {:keys [click-cb-fn lines]} (om/get-computed this)
-          sui-col-info-map {:sui-col-info #js {:className "two wide column center aligned"}}
-          _ (assert click-cb-fn "gas-query-panel")
-          grid-row-computed (merge sui-col-info-map {:click-cb-fn click-cb-fn :lines lines})
-          _ (assert gas-query-grid app-props)
-          ]
-      (dom/div nil #_{:className "ui three column internally celled grid container"}
-               ;;
-               ;; grid and trending graph need to be made separate. User dragging the mouse around s/not mean
-               ;; that new grid cells are created. Anything related to the plumb line moving can go into local state.
-               ;; When it stops moving we can copy everything to the plumb line that's in the state.
-               ;;
-               ;"Gas Query Panel"
-               (dom/div #js {:className "column"}
-                          (gas-query-grid-component (om/computed gas-query-grid grid-row-computed)))
-               (comment (dom/div #js {:className "two wide column"}
-                                 (graph/trending-graph-component trending-graph)))))))
+  )
 (def gas-query-panel-component (om/factory GasQueryPanel {:keyfn :id}))
 
 (comment (dom/table #js{:className "pure-table pure-table-striped"}

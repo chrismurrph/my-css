@@ -3,7 +3,8 @@
             [om.next :as om :refer-macros [defui]]
             [my-css.components.graphing :as graph]
             [my-css.components.grid :as grid]
-            [my-css.components.general :as gen]))
+            [my-css.components.general :as gen]
+            [my-css.components.log-debug :as ld]))
 
 (def non-union-part-of-root-query
   [{:app/sys-gases (om/get-query gen/SystemGas)}
@@ -34,8 +35,26 @@
                  ])
   Object
   (render [this]
-    (let [{:keys [grid/gas-query-grid] :as props} (om/props this)]
-      (grid/gas-query-panel-component props))))
+    (ld/log-render "TrendingTab" this)
+    (let [app-props (om/props this)
+          {:keys [grid/gas-query-grid graph/trending-graph]} app-props
+          {:keys [click-cb-fn lines]} (om/get-computed this)
+          sui-col-info-map {:sui-col-info #js {:className "two wide column center aligned"}}
+          _ (assert click-cb-fn "gas-query-panel")
+          grid-row-computed (merge sui-col-info-map {:click-cb-fn click-cb-fn :lines lines})
+          _ (assert gas-query-grid (str "Don't yet have gas-query-grid in: " (keys app-props)))
+          ]
+      (dom/div nil #_{:className "ui three column internally celled grid container"}
+               ;;
+               ;; grid and trending graph need to be made separate. User dragging the mouse around s/not mean
+               ;; that new grid cells are created. Anything related to the plumb line moving can go into local state.
+               ;; When it stops moving we can copy everything to the plumb line that's in the state.
+               ;;
+               ;"Gas Query Panel"
+               (dom/div #js {:className "column"}
+                        (grid/gas-query-grid-component (om/computed gas-query-grid grid-row-computed)))
+               (comment (dom/div #js {:className "two wide column"}
+                                 (graph/trending-graph-component trending-graph)))))))
 (def ui-trending-tab (om/factory TrendingTab))
 
 (defui ^:once ThresholdsTab

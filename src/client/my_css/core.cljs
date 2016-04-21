@@ -11,11 +11,17 @@
   (:import goog.History))
 
 (def merged-state (atom (merge state/already-normalized-tabs-state (om/tree->db ui/non-union-part-of-root-query state/initial-state true))))
-;(pprint @merged-state)
+
+(defn- arm-tab [st table k ident]
+  (swap! st update-in table assoc k ident))
+
+(defn transforms [st]
+  (-> st
+      (arm-tab [:app/trending :singleton] :grid/gas-query-grid [:gas-query-grid/by-id 10800])))
 
 (defonce app (atom (uc/new-untangled-client
-                     ; can pass an atom, which means you hand normalized it already.
-                     :initial-state merged-state
+                     ; passing an atom, since have hand normalized it already.
+                     :initial-state (transforms merged-state)
                      :started-callback (fn [app]
                                          #_(configure-routing! (:reconciler app))
                                          #_(let [h (History.)]
