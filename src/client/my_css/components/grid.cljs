@@ -2,7 +2,8 @@
   (:require [om.next :as om :refer-macros [defui]]
             [my-css.components.general :as gen]
             [om.dom :as dom]
-            [my-css.components.log-debug :as ld]))
+            [my-css.components.log-debug :as ld]
+            [my-css.components.graphing :as graph]))
 
 (defui GridDataCell
   static om/Ident
@@ -11,6 +12,7 @@
   static om/IQuery
   (query [this]
     [:grid-cell/id
+     :selected?
      {:system-gas (om/get-query gen/SystemGas)}
      {:tube (om/get-query gen/Location)}])
   Object
@@ -20,9 +22,9 @@
     (click-cb-fn id selected?))
   (render [this]
     (ld/log-render "GridDataCell" this :grid-cell/id)
-    (let [{:keys [grid-cell/id system-gas tube] :as props} (om/props this)
+    (let [{:keys [grid-cell/id system-gas tube selected?] :as props} (om/props this)
           _ (assert id)
-          {:keys [tube-num sui-col-info click-cb-fn selected?]} (om/get-computed this)
+          {:keys [tube-num sui-col-info click-cb-fn]} (om/get-computed this)
           _ (assert sui-col-info)
           _ (assert click-cb-fn "GridDataCell")
           ]
@@ -91,16 +93,14 @@
     (let [{:keys [id real-gases]} (om/props this)
           _ (assert id)
           _ (assert real-gases)
-          {:keys [sui-col-info click-cb-fn lines]} (om/get-computed this)
-          _ (assert (and sui-col-info click-cb-fn))
-          _ (assert lines)]
+          {:keys [sui-col-info click-cb-fn]} (om/get-computed this)
+          _ (assert (and sui-col-info click-cb-fn))]
       (dom/div #js {:className "row"}
                (for [gas real-gases]
                  (grid-data-cell-component
                    (om/computed gas {:sui-col-info sui-col-info
                                      :tube-num    (-> gas :hdr-tube-num)
-                                     :click-cb-fn click-cb-fn
-                                     :selected?   (boolean (some #{gas} (map :intersect lines)))})))))))
+                                     :click-cb-fn click-cb-fn})))))))
 (def grid-body-row (om/factory GridBodyRow {:keyfn :id}))
 
 (defui GasQueryGrid
@@ -111,9 +111,6 @@
   (query [this]
     [:id
      {:tube/real-gases (om/get-query GridDataCell)}
-     ; When the user selects or de-selects a line we don't want to be having to update this component in
-     ; the mutation, hence passing in by computed.
-     ;{:graph/lines (om/get-query graph/Line)}
      {:app/sys-gases (om/get-query gen/SystemGas)}
      ])
   Object
@@ -125,8 +122,7 @@
           _ (assert real-gases "no real-gases inside GasQueryGrid")
           _ (println "FIRST:" (first real-gases))
           ;_ (pprint real-gases)
-          {:keys [sui-col-info click-cb-fn lines]} (om/get-computed this)
-          _ (assert lines "no lines inside GasQueryGrid")
+          {:keys [sui-col-info click-cb-fn]} (om/get-computed this)
           sui-col-info-map {:sui-col-info sui-col-info}
           _ (assert sui-col-info)
           sui-grid-info #js {:className "ui column grid"}
@@ -137,8 +133,7 @@
                  (grid-body-row (om/computed {:real-gases hdr-and-gases
                                               :id         (:hdr-tube-num (first hdr-and-gases))}
                                              (merge sui-col-info-map
-                                                    {:click-cb-fn click-cb-fn
-                                                     :lines lines}))))))))
+                                                    {:click-cb-fn click-cb-fn}))))))))
 (def gas-query-grid-component (om/factory GasQueryGrid {:keyfn :id}))
 
 (defui GasQueryPanel

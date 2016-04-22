@@ -6,13 +6,16 @@
             [my-css.components.general :as gen]
             [my-css.components.log-debug :as ld]))
 
+;;
+;; Need to have this because we are pre-normalizing the state
+;;
 (def non-union-part-of-root-query
   [{:app/sys-gases (om/get-query gen/SystemGas)}
    {:app/tubes (om/get-query gen/Location)}
    {:tube/real-gases (om/get-query grid/GridDataCell)}
-   {:graph/lines (om/get-query graph/Line)}
    {:grid/gas-query-grid (om/get-query grid/GasQueryGrid)}
    {:grid/gas-query-panel (om/get-query grid/GasQueryPanel)}
+   {:graph/lines (om/get-query graph/Line)}
    ])
 
 (defui ^:once MapTab
@@ -37,8 +40,8 @@
   (render [this]
     (ld/log-render "TrendingTab" this)
     (let [app-props (om/props this)
-          {:keys [grid/gas-query-grid graph/trending-graph]} app-props
-          {:keys [click-cb-fn lines]} (om/get-computed this)
+          {:keys [grid/gas-query-grid graph/trending-graph graph/lines]} app-props
+          {:keys [click-cb-fn]} (om/get-computed this)
           sui-col-info-map {:sui-col-info #js {:className "two wide column center aligned"}}
           _ (assert click-cb-fn "gas-query-panel")
           grid-row-computed (merge sui-col-info-map {:click-cb-fn click-cb-fn :lines lines})

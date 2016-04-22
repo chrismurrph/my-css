@@ -106,163 +106,204 @@
                                         {512
                                          {:grid-cell/id 512,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1003]},
+                                          :tube         [:tube/by-id 1003],
+                                          :selected?    false}
                                          513
                                          {:grid-cell/id 513,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1003]},
+                                          :tube         [:tube/by-id 1003],
+                                          :selected?    false}
                                          514
                                          {:grid-cell/id 514,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1003]},
+                                          :tube         [:tube/by-id 1003],
+                                          :selected?    false}
                                          515
                                          {:grid-cell/id 515,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1003]},
+                                          :tube         [:tube/by-id 1003],
+                                          :selected?    false}
                                          516
                                          {:grid-cell/id 516,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1004]},
+                                          :tube         [:tube/by-id 1004],
+                                          :selected?    false}
                                          517
                                          {:grid-cell/id 517,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1004]},
+                                          :tube         [:tube/by-id 1004],
+                                          :selected?    false}
                                          518
                                          {:grid-cell/id 518,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1004]},
+                                          :tube         [:tube/by-id 1004],
+                                          :selected?    false}
                                          519
                                          {:grid-cell/id 519,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1004]},
+                                          :tube         [:tube/by-id 1004],
+                                          :selected?    false}
                                          520
                                          {:grid-cell/id 520,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1005]},
+                                          :tube         [:tube/by-id 1005],
+                                          :selected?    false}
                                          521
                                          {:grid-cell/id 521,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1005]},
+                                          :tube         [:tube/by-id 1005],
+                                          :selected?    false}
                                          522
                                          {:grid-cell/id 522,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1005]},
+                                          :tube         [:tube/by-id 1005],
+                                          :selected?    false}
                                          523
                                          {:grid-cell/id 523,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1005]},
+                                          :tube         [:tube/by-id 1005],
+                                          :selected?    false}
                                          524
                                          {:grid-cell/id 524,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1006]},
+                                          :tube         [:tube/by-id 1006],
+                                          :selected?    false}
                                          525
                                          {:grid-cell/id 525,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1006]},
+                                          :tube         [:tube/by-id 1006],
+                                          :selected?    false}
                                          526
                                          {:grid-cell/id 526,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1006]},
+                                          :tube         [:tube/by-id 1006],
+                                          :selected?    false}
                                          527
                                          {:grid-cell/id 527,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1006]},
+                                          :tube         [:tube/by-id 1006],
+                                          :selected?    false}
                                          528
                                          {:grid-cell/id 528,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1007]},
+                                          :tube         [:tube/by-id 1007],
+                                          :selected?    false}
                                          529
                                          {:grid-cell/id 529,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1007]},
+                                          :tube         [:tube/by-id 1007],
+                                          :selected?    false}
                                          530
                                          {:grid-cell/id 530,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1007]},
+                                          :tube         [:tube/by-id 1007],
+                                          :selected?    false}
                                          531
                                          {:grid-cell/id 531,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1007]},
+                                          :tube         [:tube/by-id 1007],
+                                          :selected?    false}
                                          500
                                          {:grid-cell/id 500,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1000]},
+                                          :tube         [:tube/by-id 1000],
+                                          :selected?    false}
                                          532
                                          {:grid-cell/id 532,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1008]},
+                                          :tube         [:tube/by-id 1008],
+                                          :selected?    false}
                                          501
                                          {:grid-cell/id 501,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1000]},
+                                          :tube         [:tube/by-id 1000],
+                                          :selected?    false}
                                          533
                                          {:grid-cell/id 533,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1008]},
+                                          :tube         [:tube/by-id 1008],
+                                          :selected?    false}
                                          502
                                          {:grid-cell/id 502,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1000]},
+                                          :tube         [:tube/by-id 1000],
+                                          :selected?    false}
                                          534
                                          {:grid-cell/id 534,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1008]},
+                                          :tube         [:tube/by-id 1008],
+                                          :selected?    false}
                                          503
                                          {:grid-cell/id 503,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1000]},
+                                          :tube         [:tube/by-id 1000],
+                                          :selected?    false}
                                          535
                                          {:grid-cell/id 535,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1008]},
+                                          :tube         [:tube/by-id 1008],
+                                          :selected?    false}
                                          504
                                          {:grid-cell/id 504,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1001]},
+                                          :tube         [:tube/by-id 1001],
+                                          :selected?    false}
                                          536
                                          {:grid-cell/id 536,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1009]},
+                                          :tube         [:tube/by-id 1009],
+                                          :selected?    false}
                                          505
                                          {:grid-cell/id 505,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1001]},
+                                          :tube         [:tube/by-id 1001],
+                                          :selected?    false}
                                          537
                                          {:grid-cell/id 537,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1009]},
+                                          :tube         [:tube/by-id 1009],
+                                          :selected?    false}
                                          506
                                          {:grid-cell/id 506,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1001]},
+                                          :tube         [:tube/by-id 1001],
+                                          :selected?    false}
                                          538
                                          {:grid-cell/id 538,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1009]},
+                                          :tube         [:tube/by-id 1009],
+                                          :selected?    false}
                                          507
                                          {:grid-cell/id 507,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1001]},
+                                          :tube         [:tube/by-id 1001],
+                                          :selected?    false}
                                          539
                                          {:grid-cell/id 539,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1009]},
+                                          :tube         [:tube/by-id 1009],
+                                          :selected?    false}
                                          508
                                          {:grid-cell/id 508,
                                           :system-gas   [:gas-of-system/by-id 150],
-                                          :tube         [:tube/by-id 1002]},
+                                          :tube         [:tube/by-id 1002],
+                                          :selected?    false}
                                          509
                                          {:grid-cell/id 509,
                                           :system-gas   [:gas-of-system/by-id 151],
-                                          :tube         [:tube/by-id 1002]},
+                                          :tube         [:tube/by-id 1002],
+                                          :selected?    false}
                                          510
                                          {:grid-cell/id 510,
                                           :system-gas   [:gas-of-system/by-id 152],
-                                          :tube         [:tube/by-id 1002]},
+                                          :tube         [:tube/by-id 1002],
+                                          :selected?    false}
                                          511
                                          {:grid-cell/id 511,
                                           :system-gas   [:gas-of-system/by-id 153],
-                                          :tube         [:tube/by-id 1002]}},
+                                          :tube         [:tube/by-id 1002]
+                                          :selected?    false
+                                          }},
                   :ui/locale            "en-US",
                   :app/current-tab      [:app/map :singleton],
                   :om.next/tables
