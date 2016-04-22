@@ -207,7 +207,7 @@
                                          {:grid-cell/id 500,
                                           :system-gas   [:gas-of-system/by-id 150],
                                           :tube         [:tube/by-id 1000],
-                                          :selected?    false}
+                                          :selected?    true}
                                          532
                                          {:grid-cell/id 532,
                                           :system-gas   [:gas-of-system/by-id 150],
@@ -217,7 +217,7 @@
                                          {:grid-cell/id 501,
                                           :system-gas   [:gas-of-system/by-id 151],
                                           :tube         [:tube/by-id 1000],
-                                          :selected?    false}
+                                          :selected?    true}
                                          533
                                          {:grid-cell/id 533,
                                           :system-gas   [:gas-of-system/by-id 151],
@@ -227,7 +227,7 @@
                                          {:grid-cell/id 502,
                                           :system-gas   [:gas-of-system/by-id 152],
                                           :tube         [:tube/by-id 1000],
-                                          :selected?    false}
+                                          :selected?    true}
                                          534
                                          {:grid-cell/id 534,
                                           :system-gas   [:gas-of-system/by-id 152],
@@ -237,7 +237,7 @@
                                          {:grid-cell/id 503,
                                           :system-gas   [:gas-of-system/by-id 153],
                                           :tube         [:tube/by-id 1000],
-                                          :selected?    false}
+                                          :selected?    true}
                                          535
                                          {:grid-cell/id 535,
                                           :system-gas   [:gas-of-system/by-id 153],

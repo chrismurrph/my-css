@@ -16,6 +16,7 @@
    {:grid/gas-query-grid (om/get-query grid/GasQueryGrid)}
    {:grid/gas-query-panel (om/get-query grid/GasQueryPanel)}
    {:graph/lines (om/get-query graph/Line)}
+   {:graph/trending-graph (om/get-query graph/TrendingGraph)}
    ])
 
 (defui ^:once MapTab

@@ -41,7 +41,7 @@
                                  ; These will be dynamically transferred in post-load
                                  ; (doesn't seem to hurt having)
                                  :grid/gas-query-grid {:id 10800}
-                                 ;:graph/trending-graph {:id 10300}
+                                 :graph/trending-graph {:id 10300}
                                  }}
    :app/thresholds  {:singleton {:id        :singleton
                                  :tab/label "Thresholds"
@@ -61,7 +61,21 @@
 (def initial-state {:grid/gas-query-panel
                                          {:id                   10700
                                           :grid/gas-query-grid  {:id 10800}
-                                          ;:graph/trending-graph {:id 10300}
+                                          :graph/trending-graph {:id 10300}
+                                          }
+
+                    :graph/trending-graph
+                                         {:id                10300
+                                          :width             640
+                                          :height            250
+                                          ;;:graph/navigator   {:id 10600}
+                                          :graph/lines       [{:id 100} {:id 101} {:id 102} {:id 103}]
+                                          :labels-visible?   false
+                                          ;;:graph/plumb-line  {:id 10201}
+                                          :graph/translators {:horiz-fn nil :vert-fn nil :point-fn nil}
+                                          ;;:graph/misc        {:id 10400}
+                                          :hover-pos         nil
+                                          :last-mouse-moment nil
                                           }
 
                     :grid/gas-query-grid {:id              10800
@@ -136,19 +150,19 @@
                                          [{:grid-cell/id 500
                                            :system-gas   {:id 150}
                                            :tube         {:id 1000}
-                                           :selected?    false}
+                                           :selected?    true}
                                           {:grid-cell/id 501
                                            :system-gas   {:id 151}
                                            :tube         {:id 1000}
-                                           :selected?    false}
+                                           :selected?    true}
                                           {:grid-cell/id 502
                                            :system-gas   {:id 152}
                                            :tube         {:id 1000}
-                                           :selected?    false}
+                                           :selected?    true}
                                           {:grid-cell/id 503
                                            :system-gas   {:id 153}
                                            :tube         {:id 1000}
-                                           :selected?    false}
+                                           :selected?    true}
                                           {:grid-cell/id 504
                                            :system-gas   {:id 150}
                                            :tube         {:id 1001}
