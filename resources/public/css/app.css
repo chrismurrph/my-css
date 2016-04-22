@@ -87,6 +87,10 @@ body {
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+.side {
+  display: inline-block;
+  vertical-align: top;
+}
 td {
   text-align: center;
   vertical-align: middle;

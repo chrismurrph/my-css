@@ -30,12 +30,16 @@
                (dom/p nil "map ...")))))
 (def ui-map-tab (om/factory MapTab))
 
+;;
+;; Replacement for GasQueryPanel, which we still need to transfer contents across
+;;
 (defui ^:once TrendingTab
   static om/IQuery
   (query [this] [:id
                  :tab/type
                  :tab/label
                  {:grid/gas-query-grid (om/get-query grid/GasQueryGrid)}
+                 {:graph/trending-graph (om/get-query graph/TrendingGraph)}
                  ])
   Object
   (render [this]
@@ -54,10 +58,10 @@
                ;; When it stops moving we can copy everything to the plumb line that's in the state.
                ;;
                ;"Gas Query Panel"
-               (dom/div #js {:className "column"}
+               (dom/div #js {:className "side"}
                         (grid/gas-query-grid-component (om/computed gas-query-grid grid-row-computed-map)))
-               (comment (dom/div #js {:className "two wide column"}
-                                 (graph/trending-graph-component trending-graph)))))))
+               (dom/div #js {:className "side"}
+                        (graph/trending-graph-component trending-graph))))))
 (def ui-trending-tab (om/factory TrendingTab))
 
 (defui ^:once ThresholdsTab

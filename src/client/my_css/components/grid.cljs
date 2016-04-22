@@ -97,6 +97,9 @@
                                        (dom/td nil (dom/input #js{:type "checkbox"}))
                                        (dom/td nil (dom/input #js{:type "checkbox"}))))))
 
+;;
+;; Only used for normalization. TrendingTab gets the queries and has the render
+;;
 (defui GasQueryPanel
   static om/Ident
   (ident [this props]
@@ -107,4 +110,3 @@
      {:grid/gas-query-grid (om/get-query GasQueryGrid)}
      {:graph/trending-graph (om/get-query graph/TrendingGraph)}
      ]))
-(def gas-query-panel-component (om/factory GasQueryPanel {:keyfn :id}))

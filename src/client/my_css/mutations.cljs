@@ -11,7 +11,11 @@
 ;;
 (defn change-tab [old-st target]
   (case target
-    :app/trending (update-in old-st [:app/trending :singleton] assoc :grid/gas-query-grid [:gas-query-grid/by-id 10800])
+    :app/trending (-> old-st
+                      (update-in [:app/trending :singleton] assoc
+                                 :grid/gas-query-grid [:gas-query-grid/by-id 10800]
+                                 :graph/trending-graph [:trending-graph/by-id 10300]
+                                 ))
     old-st))
 
 (defmethod m/mutate 'nav/lazy-load-tab [{:keys [state]} k {:keys [target]}]

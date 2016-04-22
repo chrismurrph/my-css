@@ -1,7 +1,9 @@
 (ns my-css.components.graphing
   (:require [om.next :as om :refer-macros [defui]]
-            [om.next :as om]
-            [my-css.components.general :as gen]))
+            [om.dom :as dom]
+            [my-css.components.general :as gen]
+            [my-css.components.log-debug :as ld]
+            [cljs.pprint :as pp :refer [pprint]]))
 
 (defui Intersect
   static om/Ident
@@ -34,4 +36,12 @@
      :labels-visible?
      ;;{:graph/misc (om/get-query Misc)}
      ;;{:graph/plumb-line (om/get-query PlumbLine)}
-     {:graph/translators [:point-fn :horiz-fn]}]))
+     {:graph/translators [:point-fn :horiz-fn]}])
+  Object
+  (render [this]
+    (ld/log-render-on "TrendingGraph" this)
+    (let [{:keys [graph/lines]} (om/props this)
+          _ (assert lines)
+          txt (pp/write lines :stream nil)]
+      (dom/textarea #js{:value txt}))))
+(def trending-graph-component (om/factory TrendingGraph {:keyfn :id}))
