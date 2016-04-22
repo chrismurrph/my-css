@@ -9,7 +9,10 @@
             [my-css.components.general :as gen]
             [my-css.components.graphing :as graph]
             [my-css.components.grid :as grid]
-            [my-css.state :as state]))
+            [my-css.state :as state]
+            [my-css.util.colours :as colours]
+            [my-css.parsing.mutations.lines]
+            ))
 
 (defn tab-style [tab kw]
   #js{:className (str "pure-menu-item" (if (= tab kw) " pure-menu-selected"))})
@@ -38,11 +41,19 @@
                        {:app/current-tab (om/get-query ui/TabUnion)}
                        ]))
   Object
+  (pick-colour [this cols]
+    (colours/new-random-colour cols))
+  (click-cb [this existing-colours id selected?]
+    (let [pick-colour-fn #(.pick-colour this existing-colours)]
+      (if selected?
+        (om/transact! this `[(graph/remove-line {:graph-ident (comment [:trending-graph/by-id 10300]) :intersect-id ~id})])
+        (om/transact! this `[(graph/add-line {:graph-ident (comment [:trending-graph/by-id 10300]) :intersect-id ~id :colour ~(pick-colour-fn)})]))))
   (render [this]
-    (let [{:keys [app/current-tab ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
+    (let [{:keys [app/current-tab graph/lines ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
           {:keys [tab/type tab/label]} current-tab
           _ (println "tab is " type "")
           my-reconciler (:reconciler @core/app)
+          existing-colours (into #{} (map :colour lines))
           ]
       (dom/div nil
                (if my-reconciler
@@ -89,4 +100,4 @@
                                                                      :href      "#"
                                                                      :onClick #(pprint @(:reconciler @core/app))} "Help"))))))
                (dom/div nil
-                        (ui/ui-tab current-tab))))))
+                        (ui/ui-tab (om/computed current-tab {:click-cb-fn #(.click-cb this existing-colours %1 %2)})))))))

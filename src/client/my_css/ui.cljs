@@ -40,11 +40,10 @@
   (render [this]
     (ld/log-render "TrendingTab" this)
     (let [app-props (om/props this)
-          {:keys [grid/gas-query-grid graph/trending-graph graph/lines]} app-props
+          {:keys [grid/gas-query-grid graph/trending-graph]} app-props
           {:keys [click-cb-fn]} (om/get-computed this)
-          sui-col-info-map {:sui-col-info #js {:className "two wide column center aligned"}}
           _ (assert click-cb-fn "gas-query-panel")
-          grid-row-computed (merge sui-col-info-map {:click-cb-fn click-cb-fn :lines lines})
+          grid-row-computed-map {:click-cb-fn click-cb-fn}
           _ (assert gas-query-grid (str "Don't yet have gas-query-grid in: " (keys app-props)))
           ]
       (dom/div nil #_{:className "ui three column internally celled grid container"}
@@ -55,7 +54,7 @@
                ;;
                ;"Gas Query Panel"
                (dom/div #js {:className "column"}
-                        (grid/gas-query-grid-component (om/computed gas-query-grid grid-row-computed)))
+                        (grid/gas-query-grid-component (om/computed gas-query-grid grid-row-computed-map)))
                (comment (dom/div #js {:className "two wide column"}
                                  (graph/trending-graph-component trending-graph)))))))
 (def ui-trending-tab (om/factory TrendingTab))
@@ -92,14 +91,14 @@
   (ident [this props] [(:tab/type props) (:id props)])
   Object
   (render [this]
-    (let [{:keys [tab/type graph/lines] :as props} (om/props this)
+    (let [{:keys [tab/type] :as props} (om/props this)
+          {:keys [click-cb-fn]} (om/get-computed this)
           _ (assert type)]
       (case type
         :app/map (ui-map-tab props)
-        :app/trending (ui-trending-tab (om/computed props {:lines lines :click-cb-fn #(println "You clicked it")}))
+        :app/trending (ui-trending-tab (om/computed props {:click-cb-fn click-cb-fn}))
         :app/thresholds (ui-thresholds-tab props)
         :app/reports (ui-reports-tab props)
         (dom/div nil (str "MISSING TAB: <" type ">"))))))
-
 (def ui-tab (om/factory TabUnion))
 

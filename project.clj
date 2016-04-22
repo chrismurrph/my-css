@@ -8,7 +8,9 @@
                  [org.clojure/clojurescript "1.7.228"]
                  [org.omcljs/om "1.0.0-alpha32"]
                  [navis/untangled-client "0.4.7-SNAPSHOT"]
-                 [default-db-format "0.1.1-SNAPSHOT"]]
+                 [default-db-format "0.1.1-SNAPSHOT"]
+                 ;; for compatibility with om-alarming, where we heading back...
+                 [org.clojure/core.async "0.2.374"]]
 
   :plugins [[lein-cljsbuild "1.1.2"]
             [lein-less "1.7.5"]]
