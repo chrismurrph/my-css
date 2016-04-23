@@ -75,23 +75,19 @@
                                                   (dom/li (tab-style type :app/map)
                                                           (dom/a #js{:className "pure-menu-link"
                                                                      :href      "#"
-                                                                     :onClick   #(om/transact! this '[(nav/change-tab {:target :app/map})
-                                                                                                      (nav/lazy-load-tab {:target :app/map})])} "Map"))
+                                                                     :onClick   #(om/transact! this '[(nav/load-tab {:target :app/map})])} "Map"))
                                                   (dom/li (tab-style type :app/trending)
                                                           (dom/a #js{:className "pure-menu-link"
                                                                      :href      "#"
-                                                                     :onClick   #(om/transact! this '[(nav/change-tab {:target :app/trending})
-                                                                                                      (nav/lazy-load-tab {:target :app/trending})])} "Trending"))
+                                                                     :onClick   #(om/transact! this '[(nav/load-tab {:target :app/trending})])} "Trending"))
                                                   (dom/li (tab-style type :app/thresholds)
                                                           (dom/a #js{:className "pure-menu-link"
                                                                      :href      "#"
-                                                                     :onClick   #(om/transact! this '[(nav/change-tab {:target :app/thresholds})
-                                                                                                      (nav/lazy-load-tab {:target :app/thresholds})])} "Thresholds"))
+                                                                     :onClick   #(om/transact! this '[(nav/load-tab {:target :app/thresholds})])} "Thresholds"))
                                                   (dom/li (tab-style type :app/reports)
                                                           (dom/a #js{:className "pure-menu-link"
                                                                      :href      "#"
-                                                                     :onClick   #(om/transact! this '[(nav/change-tab {:target :app/reports})
-                                                                                                      (nav/lazy-load-tab {:target :app/reports})])} "Reports")))))
+                                                                     :onClick   #(om/transact! this '[(nav/load-tab {:target :app/reports})])} "Reports")))))
                         (dom/div #js{:className "pure-u-1 pure-u-md-1-3"}
                                  (dom/div #js{:className "pure-menu pure-menu-horizontal custom-menu-3 custom-can-transform"}
                                           (dom/ul #js{:className "pure-menu-list"}
