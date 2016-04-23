@@ -2,9 +2,6 @@
   (:require [untangled.client.mutations :as m]
             [untangled.dom :refer [unique-key]]))
 
-(comment
-  (defmethod m/mutate 'nav/change-tab [{:keys [state]} k {:keys [target]}]
-    {:action (fn [] (swap! state assoc :app/current-tab [target :singleton]))}))
 
 (defn unload [state prev-target]
   (case prev-target
@@ -12,6 +9,15 @@
                       (update-in [:app/trending :singleton] dissoc
                                  :grid/gas-query-grid
                                  :graph/trending-graph
+                                 ))
+    state))
+
+(defn load [state new-target]
+  (case new-target
+    :app/trending (-> state
+                      (update-in [:app/trending :singleton] assoc
+                                 :grid/gas-query-grid [:gas-query-grid/by-id 10800]
+                                 :graph/trending-graph [:trending-graph/by-id 10300]
                                  ))
     state))
 
@@ -23,14 +29,9 @@
   (let [prev-target (first (get old-st :app/current-tab))
         new-state (-> old-st
                       (unload prev-target)
+                      (load new-target)
                       (assoc :app/current-tab [new-target :singleton]))]
-    (case new-target
-      :app/trending (-> new-state
-                        (update-in [:app/trending :singleton] assoc
-                                   :grid/gas-query-grid [:gas-query-grid/by-id 10800]
-                                   :graph/trending-graph [:trending-graph/by-id 10300]
-                                   ))
-      new-state)))
+    new-state))
 
 (defmethod m/mutate 'nav/load-tab [{:keys [state]} k {:keys [target]}]
   {:action (fn [] (swap! state change-tab target))})
