@@ -20,7 +20,7 @@
   (pick [this click-cb-fn id selected?]
     (assert id)
     (assert (not (nil? selected?)))
-    (click-cb-fn this id selected?))
+    (click-cb-fn id selected?))
   (render [this]
     (ld/log-render-on "GridDataCell" this :grid-cell/id)
     (let [{:keys [grid-cell/id system-gas tube selected?] :as props} (om/props this)
@@ -48,7 +48,7 @@
      ])
   Object
   (render [this]
-    (ld/log-render-on "GasQueryGrid" this)
+    (ld/log-render-off "GasQueryGrid" this)
     (let [props (om/props this)
           {:keys [id tube/real-gases app/sys-gases]} props
           hdr-gases (map :short-name (into [{:id 0 :short-name "Tube"}] sys-gases))
