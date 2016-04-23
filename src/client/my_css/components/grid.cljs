@@ -20,9 +20,9 @@
   (pick [this click-cb-fn id selected?]
     (assert id)
     (assert (not (nil? selected?)))
-    (click-cb-fn id selected?))
+    (click-cb-fn this id selected?))
   (render [this]
-    (ld/log-render-off "GridDataCell" this :grid-cell/id)
+    (ld/log-render-on "GridDataCell" this :grid-cell/id)
     (let [{:keys [grid-cell/id system-gas tube selected?] :as props} (om/props this)
           _ (assert id)
           _ (assert (not (nil? selected?)))

@@ -17,7 +17,7 @@
      ])
   Object
   (render [this]
-    (ld/log-render-on "TrendingGraph" this)
+    (ld/log-render-on "GraphNavigator" this)
     (let [{:keys [end-time]} (om/props this)]
       (dom/div nil
                (dom/label nil "Start")
