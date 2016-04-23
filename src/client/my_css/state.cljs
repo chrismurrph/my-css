@@ -1,5 +1,5 @@
 (ns my-css.state
-  (:require [om.next :as om]))
+  (:require [cljs-time.core :as time]))
 
 (def blue {:r 0 :g 51 :b 102})
 (def pink {:r 255 :g 0 :b 255})
@@ -68,7 +68,7 @@
                                          {:id                10300
                                           :width             640
                                           :height            250
-                                          ;;:graph/navigator   {:id 10600}
+                                          :graph/navigator   {:id 10600}
                                           :graph/lines       [{:id 100} {:id 101} {:id 102} {:id 103}]
                                           :labels-visible?   false
                                           ;;:graph/plumb-line  {:id 10201}
@@ -106,6 +106,14 @@
                                            :colour    red
                                            :intersect {:grid-cell/id 503}}
                                           ]
+
+                    :graph/navigator
+                                         {:id           10600
+                                          :end-time     (time/now)
+                                          :span-seconds (* 60 60)
+                                          :receiving?   false
+                                          }
+
                     :app/sys-gases       [{:id     150 :long-name "Methane" :short-name "CH\u2084"
                                            :lowest 0.25 :highest 1 :units "%"}
                                           {:id     151 :long-name "Oxygen" :short-name "O\u2082"

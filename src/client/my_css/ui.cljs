@@ -4,7 +4,8 @@
             [my-css.components.graphing :as graph]
             [my-css.components.grid :as grid]
             [my-css.components.general :as gen]
-            [my-css.components.log-debug :as ld]))
+            [my-css.components.log-debug :as ld]
+            [my-css.components.navigator :as navigator]))
 
 ;;
 ;; Need to have this because we are pre-normalizing the state
@@ -17,6 +18,7 @@
    {:grid/gas-query-panel (om/get-query grid/GasQueryPanel)}
    {:graph/lines (om/get-query graph/Line)}
    {:graph/trending-graph (om/get-query graph/TrendingGraph)}
+   {:graph/navigator (om/get-query navigator/GraphNavigator)}
    ])
 
 (defui ^:once MapTab

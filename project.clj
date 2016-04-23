@@ -10,6 +10,7 @@
                  [navis/untangled-client "0.4.7-SNAPSHOT"]
                  [default-db-format "0.1.1-SNAPSHOT"]
                  ;; for compatibility with om-alarming, where we heading back...
+                 [com.andrewmcveigh/cljs-time "0.3.14"]
                  [org.clojure/core.async "0.2.374"]]
 
   :plugins [[lein-cljsbuild "1.1.2"]

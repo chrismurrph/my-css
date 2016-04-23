@@ -2,6 +2,7 @@
   (:require [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
             [my-css.components.general :as gen]
+            [my-css.components.navigator :as navigator]
             [my-css.components.log-debug :as ld]
             [cljs.pprint :as pp :refer [pprint]]))
 
@@ -32,7 +33,7 @@
      :width
      :height
      {:graph/lines (om/get-query Line)}
-     ;;{:graph/navigator (om/get-query navigator/GraphNavigator)}
+     {:graph/navigator (om/get-query navigator/GraphNavigator)}
      :labels-visible?
      ;;{:graph/misc (om/get-query Misc)}
      ;;{:graph/plumb-line (om/get-query PlumbLine)}
@@ -40,8 +41,11 @@
   Object
   (render [this]
     (ld/log-render-on "TrendingGraph" this)
-    (let [{:keys [graph/lines]} (om/props this)
+    (let [{:keys [width height graph/lines graph/navigator]} (om/props this)
           _ (assert lines)
-          txt (pp/write lines :stream nil)]
-      (dom/textarea #js{:value txt}))))
+          lines-count (count lines)
+          txt (str "Num lines: " lines-count "\n\n" (pp/write lines :stream nil))]
+      (dom/div nil
+               (dom/textarea #js{:value txt :style #js{:width width :height height}})
+               (navigator/navigator navigator)))))
 (def trending-graph-component (om/factory TrendingGraph {:keyfn :id}))

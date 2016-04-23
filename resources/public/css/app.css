@@ -91,6 +91,9 @@ body {
   display: inline-block;
   vertical-align: top;
 }
+.button-xlarge {
+  font-size: 125%;
+}
 td {
   text-align: center;
   vertical-align: middle;
