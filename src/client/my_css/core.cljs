@@ -1,6 +1,7 @@
 (ns my-css.core
   (:require my-css.mutations
-            [untangled.client.core :as uc]
+            ;[untangled.client.core :as uc]
+            [client-core :as muc]
             [my-css.ui :as ui]
             [my-css.state :as state]
             [goog.events :as events]
@@ -19,9 +20,10 @@
   (-> st
       (arm-tab [:app/trending :singleton] :grid/gas-query-grid [:gas-query-grid/by-id 10800])))
 
-(defonce app (atom (uc/new-untangled-client
+(defonce app (atom (muc/new-untangled-client
                      ; passing an atom, since have hand normalized it already.
                      :initial-state merged-state
+                     :my-parser "need do this!"
                      :started-callback (fn [app]
                                          #_(configure-routing! (:reconciler app))
                                          #_(let [h (History.)]

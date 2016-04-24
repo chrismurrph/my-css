@@ -6,7 +6,8 @@
     my-css.mutations
     [untangled.client.logging :as log]
     [my-css.root :as root]
-    [untangled.client.core :as uc]
+    ;[untangled.client.core :as uc]
+    [client-core :as muc]
     [cljs.reader :as reader]))
 
 (enable-console-print!)
@@ -17,7 +18,7 @@
 
 (log/set-level :debug)
 
-(reset! core/app (uc/mount @core/app root/App "app"))
+(reset! core/app (muc/mount @core/app root/App "app"))
 
 (defn log-app-state
   "Helper for logging the app-state, pass in top-level keywords from the app-state and it will print only those
