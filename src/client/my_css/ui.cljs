@@ -50,7 +50,6 @@
           {:keys [grid/gas-query-grid graph/trending-graph]} app-props
           {:keys [click-cb-fn]} (om/get-computed this)
           _ (assert click-cb-fn "gas-query-panel")
-          grid-row-computed-map {:click-cb-fn click-cb-fn}
           _ (assert gas-query-grid (str "Don't yet have gas-query-grid in: " (keys app-props)))
           ]
       (dom/div nil #_{:className "ui three column internally celled grid container"}
@@ -61,7 +60,7 @@
                ;;
                ;"Gas Query Panel"
                (dom/div #js {:className "side"}
-                        (grid/gas-query-grid-component (om/computed gas-query-grid grid-row-computed-map)))
+                        (grid/gas-query-grid-component (om/computed gas-query-grid {:click-cb-fn click-cb-fn})))
                (dom/div #js {:className "side"}
                         (graph/trending-graph-component trending-graph))))))
 (def ui-trending-tab (om/factory TrendingTab))
