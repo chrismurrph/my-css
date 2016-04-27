@@ -50,6 +50,8 @@
         (om/transact! cell `[(graph/add-line {:graph-ident [:trending-graph/by-id 10300] :intersect-id ~id :colour ~(pick-colour-fn)}) [:trending-graph/by-id 10300]]))))
   (render [this]
     (let [{:keys [app/current-tab graph/lines ui/react-key] :or {ui/react-key "ROOT"} :as props} (om/props this)
+          ;_ (println "props is " props "")
+          _ (println "current-tab is " current-tab "")
           {:keys [tab/type tab/label]} current-tab
           _ (println "tab is " type "")
           my-reconciler (:reconciler @core/app)

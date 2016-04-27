@@ -94,7 +94,9 @@
                  :app/thresholds (om/get-query ThresholdsTab)
                  :app/reports    (om/get-query ReportsTab)})
   static om/Ident
-  (ident [this props] [(:tab/type props) (:id props)])
+  (ident [this {:keys [tab/type id] :as props}]
+    ;(println "PROPS: " props)
+    [type id])
   Object
   (render [this]
     (let [{:keys [tab/type] :as props} (om/props this)

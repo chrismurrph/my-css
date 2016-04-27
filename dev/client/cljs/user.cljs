@@ -7,8 +7,8 @@
     [untangled.client.logging :as log]
     [my-css.root :as root]
     ;[untangled.client.core :as uc]
-    [client-core :as muc]
-    [cljs.reader :as reader]))
+    [cljs.reader :as reader]
+    [my-css.client-core :as muc]))
 
 (enable-console-print!)
 

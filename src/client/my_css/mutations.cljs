@@ -1,6 +1,8 @@
 (ns my-css.mutations
-  (:require [untangled.client.mutations :as m]
-            [untangled.dom :refer [unique-key]]))
+  (:require
+    [untangled.client.mutations :as m]
+    [untangled.dom :refer [unique-key]]
+    ))
 
 (def tab-loadings [{:target :app/trending
                     :moves  [{:key :grid/gas-query-grid :ident [:gas-query-grid/by-id 10800]}
