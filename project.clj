@@ -7,8 +7,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.228"]
                  [org.omcljs/om "1.0.0-alpha32"]
-                 ;; Waiting for Tony to clojar 0.4.8
-                 [navis/untangled-client "0.4.7-SNAPSHOT"]
+                 [navis/untangled-client "0.4.8"]
                  [default-db-format "0.1.1-SNAPSHOT"]
                  ;; for compatibility with om-alarming, where we heading back...
                  [com.andrewmcveigh/cljs-time "0.3.14"]
